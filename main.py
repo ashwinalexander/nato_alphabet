@@ -1,16 +1,15 @@
 
 import pandas as pd
 
-#TODO 1. Create a dictionary in this format:
-{"A": "Alfa", "B": "Bravo"}
+# convert csv to dataframe
+nato_data = pd.read_csv("nato_phonetic_alphabet.csv")
 
+# Keyword comprehension + convert dataframe to dict using iterrows()
+nato_dict = {row.letter: row.code for (idx,row) in nato_data.iterrows()}
 
-with open("nato_phonetic_alphabet.csv") as nato:
-    nato_data = nato.read()
+user_name = input("Enter a word:")
 
-print(nato_data)
+# List comprehension with some dict lookups
+nato_user_name = [nato_dict[letter.upper()] for letter in user_name]
 
-
-
-#TODO 2. Create a list of the phonetic code words from a word that the user inputs.
-
+print(nato_user_name)
